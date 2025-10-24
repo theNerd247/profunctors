@@ -133,7 +133,7 @@ fanIn l r = lmap (either id id) id . splitChoice l r
 -- > proIf (const False) f t ~ f
 -- > proIf (const True) f t ~ t
 if_ :: (Category p, Choice p) => (a -> Bool) -> p a b -> p a b -> p a b
-if_ pred l r = dimap ((bool <$> Left <*> Right <*> pred)) (either id id) $ splitChoice l r
+if_ p l r = dimap ((bool <$> Left <*> Right <*> p)) (either id id) $ splitChoice l r
 {-# INLINE if_ #-}
 
 instance Choice (->) where
